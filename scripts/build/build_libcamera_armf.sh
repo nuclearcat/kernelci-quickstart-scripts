@@ -1,8 +1,6 @@
 #!/bin/sh
 PARAM="--settings=kernelci-armf.conf"
 cd /root/kernelci-quickstart/kernelci-core
-echo Update mirror
-./kci_build ${PARAM} update_mirror --build-config=next --mirror=linux-mirror.git
 echo Update repo
 ./kci_build ${PARAM} update_repo --build-config=next --mirror=linux-mirror.git
 #echo Generate additional config fragments
