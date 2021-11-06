@@ -5,12 +5,10 @@ echo Update mirror
 ./kci_build ${PARAM} update_mirror --build-config=next --mirror=linux-mirror.git
 echo Update repo
 ./kci_build ${PARAM} update_repo --build-config=next --mirror=linux-mirror.git
-echo generate_fragments
-./kci_build ${PARAM} generate_fragments --build-config=next
 echo Init BMeta
 ./kci_build ${PARAM} init_bmeta --build-config=next
 echo make_config
-./kci_build ${PARAM} make_config --defconfig=x86_64_defconfig+x86-chromebook
+./kci_build ${PARAM} make_config --defconfig=defconfig
 echo make_kernel
 ./kci_build ${PARAM} make_kernel
 echo make_modules
