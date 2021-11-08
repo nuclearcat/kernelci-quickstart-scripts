@@ -1,6 +1,6 @@
 #!/bin/sh
 # TBD, not completed yet
-
+echo Housekeeping...
 # TODO check if exists?
 rm -rf bootable
 mkdir bootable
@@ -17,5 +17,8 @@ find lib/ | cpio -ov -H newc -F modules.cpio
 gzip -d initrd.cpio.gz
 cat modules.cpio >>initrd.cpio
 gzip -1 initrd.cpio
-
-qemu-system-x86_64-spice -kernel bzImage -initrd initrd.cpio.gz -drive file=rootfs.ext4,format=raw -append "root=/dev/sda1 rdinit=/bin/init console=ttyS0"
+echo Unpacking rootfs
+xz -d rootfs.ext4.xz
+cd ..
+echo Starting qemu
+qemu-system-x86_64 -kernel bootable/bzImage -initrd bootable/initrd.cpio.gz -drive file=bootable/rootfs.ext4,format=raw -append "root=/dev/sda1 rdinit=/bin/init console=ttyS0" -nographic
