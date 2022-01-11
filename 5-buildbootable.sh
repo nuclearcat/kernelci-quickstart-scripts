@@ -21,4 +21,4 @@ echo Unpacking rootfs
 xz -d rootfs.ext4.xz
 cd ..
 echo Starting qemu
-qemu-system-x86_64 -kernel bootable/bzImage -initrd bootable/initrd.cpio.gz -drive file=bootable/rootfs.ext4,format=raw -append "root=/dev/sda1 rdinit=/bin/init console=ttyS0" -nographic
+qemu-system-x86_64 -kernel bootable/bzImage -initrd bootable/initrd.cpio.gz -drive file=bootable/rootfs.ext4,format=raw -append "root=/dev/sda1 rdinit=/bin/init console=ttyS0" -m 1G -nographic
