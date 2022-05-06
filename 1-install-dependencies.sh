@@ -6,7 +6,9 @@ sudo apt install --no-install-recommends qemu-system-x86
 # You can use your own fork of kernelci and branch, for testing PR
 git clone https://github.com/kernelci/kernelci-core.git
 # Custom branch (optional)
+cd kernelci-core
 git checkout chromeos
+cd ..
 
 cp cfg/* kernelci-core/
 cd kernelci-core
