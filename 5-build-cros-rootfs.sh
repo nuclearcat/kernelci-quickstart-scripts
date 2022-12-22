@@ -4,17 +4,6 @@
 #cd kernelci-core
 #docker run \
 #    --name kernelci-build-cros \
-#    -it \
-#    -v $(pwd):/kernelci-core \
-#    --device /dev/kvm \
-#    -v /dev:/dev \
-#    --privileged \
-#    kernelci/cros-sdk /bin/bash
-#exit
-
-
-#docker run \
-#    --name kernelci-build-cros \
 #    -itd \
 #    -v $(pwd):/kernelci-core \
 #    --device /dev/kvm \
@@ -22,6 +11,7 @@
 #    --privileged \
 #    --user cros \
 #    kernelci/cros-sdk:kernelci
+#exit
 
 docker exec \
     -it kernelci-build-cros \
@@ -29,9 +19,11 @@ docker exec \
 
 docker exec \
     -it kernelci-build-cros \
-    kci_rootfs \
+    bash -c 'cd /kernelci-core;
+    ./kci_rootfs \
     build \
-    --rootfs-config chromiumos-nami \
-    --data-path /etc/kernelci/rootfs/chromiumos \
-    --arch amd64 \
+    --rootfs-config chromiumos-kukui \
+    --data-path /kernelci-core/config/rootfs/chromiumos \
+    --arch arm64 \
     --output /kernelci-core/temp
+    '

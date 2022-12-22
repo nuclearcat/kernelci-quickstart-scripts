@@ -1,6 +1,6 @@
 #!/bin/sh
 PARAM="--settings=kernelci-x86_64-gcc-10_arm64.conf"
-BUILDNAME="stable_5.19"
+BUILDNAME="stable_6.0"
 echo HI
 ls -la
 #git clone --depth=1 https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git
@@ -12,6 +12,7 @@ echo generate_fragments
 echo Init BMeta
 ./kci_build ${PARAM} init_bmeta --build-config=${BUILDNAME}
 echo make_config
+#./kci_build ${PARAM} make_config --defconfig=cros://chromeos-5.15/arm64/chromiumos-mediatek.flavour.config+arm64-chromebook+CONFIG_MODULE_COMPRESS_GZIP=n
 ./kci_build ${PARAM} make_config --defconfig=defconfig+arm64-chromebook
 echo make_dtbs
 ./kci_build ${PARAM} make_dtbs
