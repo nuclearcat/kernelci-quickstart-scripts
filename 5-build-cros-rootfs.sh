@@ -1,10 +1,11 @@
 #!/bin/sh
 docker stop kernelci-build-cros
 docker rm kernelci-build-cros
+cd kernelci-core
 docker run \
     --name kernelci-build-cros \
     -itd \
-    -v $(pwd)/kernelci-core:/kernelci-core \
+    -v $(pwd):/kernelci-core \
     --device /dev/kvm \
     -v /dev:/dev \
     --privileged \
