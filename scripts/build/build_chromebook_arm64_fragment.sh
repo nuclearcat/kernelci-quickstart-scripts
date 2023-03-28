@@ -5,6 +5,9 @@ echo HI
 ls -la
 #git clone --depth=1 https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git
 cd kernelci-quickstart/kernelci-core
+#find / -name __init__.py | grep kernelci
+#sudo rm -rf /usr/local/lib/python3.9/dist-packages/kernelci-1.1-py3.9.egg
+#/bin/bash
 echo Update repo
 ./kci_build ${PARAM} update_repo --build-config=${BUILDNAME} --mirror=linux-mirror.git
 echo generate_fragments
@@ -17,8 +20,12 @@ echo make_config
 echo make_dtbs
 ./kci_build ${PARAM} make_dtbs
 echo fetch_firmware
+#tar -C 
 ./kci_build ${PARAM} fetch_firmware
 echo make_kernel
 ./kci_build ${PARAM} make_kernel
 echo make_modules
 ./kci_build ${PARAM} make_modules
+echo make_dtbs
+./kci_build ${PARAM} make_dtbs
+

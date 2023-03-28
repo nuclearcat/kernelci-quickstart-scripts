@@ -8,21 +8,31 @@ docker run \
     -v $(pwd):/kernelci-core \
     --device /dev/kvm \
     -v /dev:/dev \
+    -v $(pwd)/config:/etc/kernelci \
     --privileged \
     --user cros \
-    kernelci/cros-sdk
+    kernelci/cros-sdk:kernelci
 
-docker exec \
-    -it kernelci-build-cros \
-    /bin/bash
+# Execute something manually?
+#docker exec \
+#    -it kernelci-build-cros \
+#    /bin/bash
+#exit
 
+# if argument set
+if [ -n "$1" ]; then
+    brd = $1
+    echo building $brd
+fi
+
+echo building ${brd}
 docker exec \
-    -it kernelci-build-cros \
-    bash -c 'cd /kernelci-core;
+    kernelci-build-cros \
+    bash -c "cd /kernelci-core;
     ./kci_rootfs \
     build \
-    --rootfs-config chromiumos-trogdor \
+    --rootfs-config chromiumos-${brd} \
     --data-path /kernelci-core/config/rootfs/chromiumos \
-    --arch arm64 \
+    --arch amd64 \
     --output /kernelci-core/temp
-    '
+    "

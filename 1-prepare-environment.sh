@@ -7,6 +7,7 @@ cwd=$(pwd)
 echo Kill old and setup new build docker
 sudo docker stop kernelci-build
 sudo docker rm kernelci-build
-chown 1000 ${cwd}/../kernelci-quickstart-scripts
-sudo docker run -it -v ${cwd}:/home/kernelci/kernelci-quickstart --name kernelci-build kernelci/kernelci /home/kernelci/kernelci-quickstart/scripts/prepare/mirror.sh
 
+sudo docker run -it -v ${cwd}:/home/kernelci/kernelci-quickstart --name kernelci-build kernelci/kernelci /home/kernelci/kernelci-quickstart/scripts/prepare/mirror.sh
+mkdir -p kernelci-core/temp
+chown -R 996 kernelci-core
