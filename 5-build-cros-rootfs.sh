@@ -21,7 +21,7 @@ docker run \
 
 # if argument set
 if [ -n "$1" ]; then
-    brd = $1
+    brd=$1
     echo building $brd
 fi
 
